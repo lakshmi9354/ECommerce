@@ -1,13 +1,17 @@
 package com.hcl.ecommerce.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hcl.ecommerce.dto.UpdateUserDto;
+import com.hcl.ecommerce.dto.UserDetailsDto;
 import com.hcl.ecommerce.dto.UserDto;
 import com.hcl.ecommerce.exception.PasswordMismatchException;
 import com.hcl.ecommerce.exception.UserNameNotSameException;
@@ -71,6 +75,18 @@ public class UserServiceImpl implements IUserService {
 		} else {
 			throw new UserNotFoundException("Invlid username or password");
 		}
+	}
+
+	public List<UserDetailsDto> users(String role) {
+		LOGGER.debug("UserServiceImpl:users {} ", role);
+		List<User> users = userRepository.findByRole(role);
+		List<UserDetailsDto> userDetailsDtos = new ArrayList<>();
+		for(User user :users) {
+			UserDetailsDto userDetailsDto = new UserDetailsDto();
+			BeanUtils.copyProperties(user, userDetailsDto);
+			userDetailsDtos.add(userDetailsDto);
+		}
+		return userDetailsDtos;
 	}
 
 }

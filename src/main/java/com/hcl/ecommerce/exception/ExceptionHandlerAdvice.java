@@ -21,6 +21,4 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
-
-
 }

@@ -1,10 +1,14 @@
 package com.hcl.ecommerce.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.ecommerce.dto.UpdateUserDto;
+import com.hcl.ecommerce.dto.UserDetailsDto;
 import com.hcl.ecommerce.dto.UserDto;
 import com.hcl.ecommerce.service.IUserService;
 
@@ -42,5 +47,11 @@ public class UserController {
 		LOGGER.debug("UserController:validateLogin {} ", userName);
 		String response = userService.validateLogin(userName, password);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	@GetMapping("/users/{role}")
+	public ResponseEntity<List<UserDetailsDto>> users(@PathVariable("role") String role){
+		LOGGER.debug("UserController:users {} ", role);
+		List<UserDetailsDto> userDetailsDto = userService.users(role);
+		return new ResponseEntity<>(userDetailsDto,HttpStatus.ACCEPTED);
 	}
 }

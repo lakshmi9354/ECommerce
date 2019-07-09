@@ -1,5 +1,6 @@
 package com.hcl.ecommerce.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	User findByUserName(@Param("userName") String userName);
 
 	Optional<User> findByUserNameAndPassword(String userName, String encodePassword);
+
+	@Query(value = "select u.* from user u where u.role = :role",nativeQuery = true)
+	List<User> findByRole(@Param("role") String role);
 
 }
