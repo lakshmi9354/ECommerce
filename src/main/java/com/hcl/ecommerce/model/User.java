@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,13 +26,15 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
-	
+	private String firstName;
+	private String lastName;
+	@NotEmpty(message = "User Name Canot be Empty")
+	@Size(min = 2,max = 10,message = "User Name Should be 2 to 10 characters")
 	private String userName;
-	
+	private String city;
+	private String mobile;
 	private String email;
-	
 	private String password;
-	
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

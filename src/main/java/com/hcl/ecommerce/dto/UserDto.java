@@ -14,15 +14,14 @@ import lombok.NoArgsConstructor;
 public class UserDto implements Serializable{
 
 	private static final long serialVersionUID = -3859241816334180782L;
-		
+	private String firstName;
+	private String lastName;
 	private String userName;
-	
+	private String city;
+	private String mobile;
 	private String email;
-	
 	private String password;
-	
 	private String confirmPasword;
-	
 	private Role role;
 
 }

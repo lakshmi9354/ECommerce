@@ -2,11 +2,13 @@ package com.hcl.ecommerce.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.hcl.ecommerce.model.ErrorReponse;
 
+@ControllerAdvice
 public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
