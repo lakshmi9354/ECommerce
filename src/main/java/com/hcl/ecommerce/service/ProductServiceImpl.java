@@ -40,12 +40,9 @@ public class ProductServiceImpl implements IProductService{
 				else {
 						product = new Product();
 						Date date = new Date();
-						product.setProductName(productDto.getProductName());
-						product.setProductCode(productDto.getProductCode());
-						product.setProductPrice(productDto.getProductPrice());
-						product.setProductQuantity(productDto.getProductQuantity());
 						product.setLastUpdate(date);
 						product.setCategory(category);
+						BeanUtils.copyProperties(productDto, product);
 						productRepository.save(product);
 						return "Product added Successfully";
 				}

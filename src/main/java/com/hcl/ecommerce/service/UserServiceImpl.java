@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
 				if (emailValidation(userDto.getEmail()))
 					if (mobileNumberValidation(userDto.getMobile())) {
 						user = new User();
+						user.setPassword(passwordEncoder.encodePassword(userDto.getPassword()));
 						BeanUtils.copyProperties(userDto, user);
 						userRepository.save(user);
 						return "User Created Successfully";

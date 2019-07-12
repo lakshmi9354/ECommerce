@@ -33,11 +33,11 @@ public class UserController {
 	public ResponseEntity<String> createUser(@RequestBody UserDto userDto) {
 		LOGGER.debug("UserController:createUser {}{}{} ", userDto);
 		String response = userService.createUser(userDto);
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 
 	}
-	@PutMapping("/updateUser")
-	public ResponseEntity<String> updateUserProfile(Long userId,UpdateUserDto updateUserDto){
+	@PutMapping("/updateUser/{userId}")
+	public ResponseEntity<String> updateUserProfile(@PathVariable("userId") Long userId,@RequestBody UpdateUserDto updateUserDto){
 		LOGGER.debug("UserController:updateUserProfile {} ", updateUserDto);
 		String response = userService.updateUserProfile(userId, updateUserDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -52,6 +52,6 @@ public class UserController {
 	public ResponseEntity<List<UserDetailsDto>> users(@PathVariable("role") String role){
 		LOGGER.debug("UserController:users {} ", role);
 		List<UserDetailsDto> userDetailsDto = userService.users(role);
-		return new ResponseEntity<>(userDetailsDto,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(userDetailsDto,HttpStatus.OK);
 	}
 }
