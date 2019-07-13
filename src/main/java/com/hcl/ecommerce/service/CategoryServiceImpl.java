@@ -1,8 +1,6 @@
 package com.hcl.ecommerce.service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,15 +40,17 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	}
 
-	public List<CategoryDetailsDto> productsByCategory() {
+	public CategoryDetailsDto productsByCategory(String categoryName) {
 		LOGGER.debug("CategoryServiceImpl:productsByCategory ");
-		List<CategoryDetailsDto> categorieDetailsDtos = new ArrayList<CategoryDetailsDto>(); 
-				List<Category> categories = categoryRepository.findAll();
-				for(Category category : categories) {
-					CategoryDetailsDto categoryDetailsDto = new CategoryDetailsDto();
+		CategoryDetailsDto categoryDetailsDto = null;
+		Category category = categoryRepository.findByCategoryName(categoryName);
+		if(category!=null) {
+					categoryDetailsDto = new CategoryDetailsDto();
 					BeanUtils.copyProperties(category, categoryDetailsDto);
-					categorieDetailsDtos.add(categoryDetailsDto);
-				}
-		return categorieDetailsDtos;
+		}
+		else {
+			throw new CategoryNameNotSameException("Category Name Not Availabe.");
+		}
+		return categoryDetailsDto;
 	}
 }
