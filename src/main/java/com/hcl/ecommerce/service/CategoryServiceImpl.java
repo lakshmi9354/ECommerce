@@ -22,11 +22,11 @@ public class CategoryServiceImpl implements ICategoryService {
 	CategoryRepository categoryRepository;
 
 	public String addCategory(CategoryDto categoryDto){
-		
 		LOGGER.debug("CategoryServiceImpl:addCategory {}{}{} ",categoryDto);
 		
 		Category category = categoryRepository.findByCategoryName(categoryDto.getCategoryName());
 		if(category!=null) {
+			System.out.println(category.getCategoryName()+ "Already Exists");
 			throw new CategoryNameNotSameException(category.getCategoryName()+ "Already Exists");
 		}
 		else {

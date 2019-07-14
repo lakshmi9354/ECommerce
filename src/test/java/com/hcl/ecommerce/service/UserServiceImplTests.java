@@ -30,7 +30,7 @@ import com.hcl.ecommerce.util.PasswordEncoder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceImplTests {
 
 	@Autowired
 	UserServiceImpl userService;

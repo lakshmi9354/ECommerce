@@ -45,7 +45,7 @@ public class UserServiceImpl implements IUserService {
 				if (emailValidation(userDto.getEmail()))
 					if (mobileNumberValidation(userDto.getMobile())) {
 						user = new User();
-						user.setPassword(passwordEncoder.encodePassword(userDto.getPassword()));
+						userDto.setPassword(passwordEncoder.encodePassword(userDto.getPassword()));
 						BeanUtils.copyProperties(userDto, user);
 						userRepository.save(user);
 						return "User Created Successfully";
@@ -71,7 +71,6 @@ public class UserServiceImpl implements IUserService {
 				throw new EmailValidationException("Email Id must and should ex@gmail.com");
 		} else
 			throw new UserNotFoundException("User Not Found");
-
 	}
 	
 	public String validateLogin(String userName, String password) {

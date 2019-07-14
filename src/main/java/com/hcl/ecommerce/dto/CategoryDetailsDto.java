@@ -8,10 +8,12 @@ import com.hcl.ecommerce.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CategoryDetailsDto implements Serializable{
 	
 	private static final long serialVersionUID = -3240704841680514359L;
